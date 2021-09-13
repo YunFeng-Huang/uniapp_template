@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "pagesB",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "pagesC",
+      "pages": [
+        "index/index"
+      ]
+    }
+  ],
+  "window": {
+    "defaultTitle": "uni-app",
+    "titleBarColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,10 @@
+{
+  "extEnable": true,
+  "extAppid":"wx7f0abfd13cc72580",
+  "directCommit": false,
+  "ext": {
+    "domain": "https://d-applet.iuctrip.com",
+    "appid": "wx7f0abfd13cc72580",
+    "merchantId":"406"
+  }
+}
