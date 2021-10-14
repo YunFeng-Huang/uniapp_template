@@ -9106,11 +9106,11 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _pages_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pages_index.js */ 61));
-var _pagesA_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesA_index.js */ 63));
-var _pagesB_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesB_index.js */ 64));
-var _pagesC_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesC_index.js */ 65));
-var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _pages_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pages_index.js */ 12));
+var _pagesA_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesA_index.js */ 21));
+var _pagesB_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesB_index.js */ 22));
+var _pagesC_index = _interopRequireDefault(__webpack_require__(/*! ./modules/pagesC_index.js */ 23));
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 _index.default.commit('EXTCONFIG');var _default =
 {
   pages: _pages_index.default,
@@ -9119,18 +9119,134 @@ _index.default.commit('EXTCONFIG');var _default =
   pagesC: _pagesC_index.default };exports.default = _default;
 
 /***/ }),
-/* 12 */,
+/* 12 */
+/*!*********************************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pages_index.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var ISWX = true;
+
+ISWX = false;
+
+// 'POST GET//必须大写，为了兼容其他应用'
+var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params, {
+    hasToken: false,
+    leaveQueue: true });};
+
+var member_login = function member_login(params) {
+  return (0, _request.default)('/api/destination/applet/member/login', params, {
+    hasToken: false,
+    leaveQueue: true });
+
+};
+var weixin_unionId = function weixin_unionId(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_unionId', params, {
+    hasToken: false,
+    leaveQueue: true });};
+
+var scenic_spot_list = function scenic_spot_list(params) {return (0, _request.default)('/api/destination/applet/scenic_spot/page', params);};
+// let scenic_spot_list = (params) => fetch('/api/destination/applet/skinV2/query', params)
+var _default =
+
+
+
+{
+  login: ISWX ? weixin_login : member_login,
+  scenic_spot_list: scenic_spot_list };exports.default = _default;
+
+/***/ }),
 /* 13 */
+/*!*********************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/request.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 14));
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 17));
+var _queue = _interopRequireDefault(__webpack_require__(/*! @/api/queue.js */ 69));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+
+// type config:{
+// 	hasToken :bool，
+//  leaveQueue :false
+// }
+var fetch = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(url, data, config) {var _store$state$extConfi, domain, merchantId, fn;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_store$state$extConfi =
+
+
+
+            _index.default.state.extConfig, domain = _store$state$extConfi.domain, merchantId = _store$state$extConfi.merchantId;
+
+
+            fn = function fn() {return new Promise( /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(resolve, reject) {var _config$hasToken;var token, header, option;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                          token = uni.getStorageSync('token');
+                          console.log(token, data);if (!(
+                          !token && ((_config$hasToken = config === null || config === void 0 ? void 0 : config.hasToken) !== null && _config$hasToken !== void 0 ? _config$hasToken : true))) {_context.next = 5;break;}_context.next = 5;return (
+                            _index.default.dispatch('USERLOGIN'));case 5:
+
+                          header = {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'token': uni.getStorageSync('token'),
+                            'gray-version': 'develop-3.56',
+                            'merchant-id': merchantId };
+
+
+                          data = _objectSpread(_objectSpread({},
+                          data),
+                          {
+                            merchantId: merchantId });
+
+
+
+                          if (data.qs) {
+                            header['Content-Type'] = 'application/x-www-form-urlencoded';
+                          }
+
+                          option = _objectSpread(_objectSpread(_objectSpread({},
+                          {
+                            method: 'POST',
+                            header: header,
+                            dataType: 'json' }),
+
+                          data),
+                          {
+                            url: domain + url,
+                            data: data });
+
+
+
+                          uni.request(option).then(function (res) {
+                            if (!res[0]) {
+                              if (res[1].data.success) {
+                                resolve(res[1].data);
+                              } else {
+                                reject(res[1].data);
+                              }
+                            } else {
+                              reject(res[0].errMsg);
+                            }
+                          });case 10:case "end":return _context.stop();}}}, _callee);}));return function (_x4, _x5) {return _ref2.apply(this, arguments);};}());};return _context2.abrupt("return",
+
+            (0, _queue.default)(fn, config));case 3:case "end":return _context2.stop();}}}, _callee2);}));return function fetch(_x, _x2, _x3) {return _ref.apply(this, arguments);};}();var _default =
+
+fetch;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 14 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 14);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 15);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9161,7 +9277,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 15);
+module.exports = __webpack_require__(/*! ./runtime */ 16);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9177,7 +9293,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -9908,7 +10024,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /*!*********************************************************************!*\
   !*** /Users/bangjinyu/Documents/www/uniapp-template/store/index.js ***!
   \*********************************************************************/
@@ -9917,10 +10033,10 @@ if (hadRuntime) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 17));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 18));
 var _index = _interopRequireDefault(__webpack_require__(/*! @/api/index.js */ 11));
-var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 18));
-var _setting = _interopRequireDefault(__webpack_require__(/*! ./modules/setting.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 19));
+var _setting = _interopRequireDefault(__webpack_require__(/*! ./modules/setting.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 创建持久化配置
 var dataState = (0, _vuexPersistedstate.default)({
   storage: {
@@ -9949,15 +10065,15 @@ new _vuex.default.Store({
     EXTCONFIG: function EXTCONFIG(state, value) {
       try {
         var res = uni.getSystemInfoSync();
-        console.log(res, 'getSystemInfoSync');
         state.system = res;
+        var extConfig;
 
-        state.extConfig = my.getExtConfigSync() ? my.getExtConfigSync() : {};
+        extConfig = my.getExtConfigSync() ? my.getExtConfigSync() : {};
 
 
 
 
-        console.log(state.extConfig, 'state.extConfig');
+        state.extConfig = extConfig;
         var e = res;
         var statusBar = 0;
         var customBar = 0;
@@ -10119,7 +10235,7 @@ new _vuex.default.Store({
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
   \********************************************/
@@ -11231,7 +11347,7 @@ var index = {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /*!**********************************************************************************************************************!*\
   !*** /Users/bangjinyu/Documents/www/uniapp-template/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
   \**********************************************************************************************************************/
@@ -11242,7 +11358,7 @@ var index = {
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var r = function r(_r) {return function (r) {return !!r && "object" == typeof r;}(_r) && !function (r) {var t = Object.prototype.toString.call(r);return "[object RegExp]" === t || "[object Date]" === t || function (r) {return r.$$typeof === e;}(r);}(_r);},e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;function t(r, e) {return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;}function n(r, e, n) {return r.concat(e).map(function (r) {return t(r, n);});}function o(r) {return Object.keys(r).concat(function (r) {return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {return r.propertyIsEnumerable(e);}) : [];}(r));}function c(r, e) {try {return e in r;} catch (r) {return !1;}}function u(e, i, a) {(a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;var f = Array.isArray(i);return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {var i = {};return n.isMergeableObject(r) && o(r).forEach(function (e) {i[e] = t(r[e], n);}), o(e).forEach(function (o) {(function (r, e) {return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));})(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {if (!e.customMerge) return u;var t = e.customMerge(r);return "function" == typeof t ? t : u;}(o, n)(r[o], e[o], n) : t(e[o], n));}), i;}(e, i, a) : t(i, a);}u.all = function (r, e) {if (!Array.isArray(r)) throw new Error("first argument should be an array");return r.reduce(function (r, t) {return u(r, t, e);}, {});};var i = u;function a(r) {var e = (r = r || {}).storage || window && window.localStorage,t = r.key || "vuex";function n(r, e) {var t = e.getItem(r);try {return void 0 !== t ? JSON.parse(t) : void 0;} catch (r) {}}function o() {return !0;}function c(r, e, t) {return t.setItem(r, JSON.stringify(e));}function u(r, e) {return Array.isArray(e) ? e.reduce(function (e, t) {return function (r, e, t, n) {return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {return r[e] = r[e] || {};}, r)[e.pop()] = t), r;}(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {return r && r[e];}, n)) ? void 0 : n));var n, o;}, {}) : r;}function a(r) {return function (e) {return r.subscribe(e);};}(r.assertStorage || function () {e.setItem("@@", 1), e.removeItem("@@");})(e);var f,s = function s() {return (r.getState || n)(t, e);};return r.fetchBeforeUse && (f = s()), function (n) {r.fetchBeforeUse || (f = s()), "object" == typeof f && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, { arrayMerge: r.arrayMerger || function (r, e) {return e;}, clone: !1 })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {(r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);});};}var _default = a;exports.default = _default;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /*!*******************************************************************************!*\
   !*** /Users/bangjinyu/Documents/www/uniapp-template/store/modules/setting.js ***!
   \*******************************************************************************/
@@ -11277,10 +11393,84 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     } } };exports.default = _default;
 
 /***/ }),
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
+/* 21 */
+/*!**********************************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesA_index.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// import store from '@/store/index.js';
+// import {formatGetUri} from '@/api/util.js';
+// store.commit('EXTCONFIG')
+var ISWX = true;
+
+ISWX = false;
+
+// 'POST GET//必须大写，为了兼容其他应用'
+var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
+var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
+
+
+
+{
+  login: ISWX ? weixin_login : member_login };exports.default = _default;
+
+/***/ }),
+/* 22 */
+/*!**********************************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesB_index.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// import store from '@/store/index.js';
+// import {formatGetUri} from '@/api/util.js';
+// store.commit('EXTCONFIG')
+var ISWX = true;
+
+ISWX = false;
+
+// 'POST GET//必须大写，为了兼容其他应用'
+var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
+var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
+
+
+
+{
+  login: ISWX ? weixin_login : member_login };exports.default = _default;
+
+/***/ }),
+/* 23 */
+/*!**********************************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesC_index.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// import store from '@/store/index.js';
+// import {formatGetUri} from '@/api/util.js';
+// store.commit('EXTCONFIG')
+var ISWX = true;
+
+ISWX = false;
+
+// 'POST GET//必须大写，为了兼容其他应用'
+var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
+var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
+
+
+
+{
+  login: ISWX ? weixin_login : member_login };exports.default = _default;
+
+/***/ }),
 /* 24 */,
 /* 25 */,
 /* 26 */,
@@ -11318,179 +11508,69 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 58 */,
 /* 59 */,
 /* 60 */,
-/* 61 */
-/*!*********************************************************************************!*\
-  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pages_index.js ***!
-  \*********************************************************************************/
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+/*!*******************************************************************!*\
+  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/queue.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var ISWX = true;
-
-ISWX = false;
-
-// 'POST GET//必须大写，为了兼容其他应用'
-var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params, {
-    hasToken: false });};
-
-var member_login = function member_login(params) {
-  console.log(params, 'params');
-  return (0, _request.default)('/api/destination/applet/member/login', params, {
-    hasToken: false });
-
-};
-var weixin_unionId = function weixin_unionId() {for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {params[_key] = arguments[_key];}return (0, _request.default)('/api/destination/applet/weixin/member/weixin_unionId', params, {
-    hasToken: false });};
-
-var scenic_spot_list = function scenic_spot_list(params) {return (0, _request.default)('/api/destination/applet/scenic_spot/page', params);};var _default =
-
-
-
-{
-  login: ISWX ? weixin_login : member_login,
-  scenic_spot_list: scenic_spot_list };exports.default = _default;
-
-/***/ }),
-/* 62 */
-/*!*********************************************************************!*\
-  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/request.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));
-
-
-var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
-
-var fetch = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(url, data, config) {var _config$hasToken;var token, baseUrl;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            token = uni.getStorageSync('token');
-            baseUrl = _index.default.state.extConfig.domain;if (!(
-            !token && ((_config$hasToken = config === null || config === void 0 ? void 0 : config.hasToken) !== null && _config$hasToken !== void 0 ? _config$hasToken : true))) {_context.next = 6;break;}_context.next = 5;return (
-              _index.default.dispatch('USERLOGIN'));case 5:
-            token = uni.getStorageSync('token');case 6:
-
-            console.log(config === null || config === void 0 ? void 0 : config.hasToken, token, url);return _context.abrupt("return",
-            new Promise(function (resolve, reject) {
-              var header = {
-                'Content-Type': 'application/json;charset=UTF-8',
-                'token': token,
-                'gray-version': 'develop-3.56' };
-
-              if (data.qs) {
-                header['Content-Type'] = 'application/x-www-form-urlencoded';
-              }
-              var option = _objectSpread(_objectSpread(_objectSpread({}, {
-                method: 'POST',
-                header: header,
-                dataType: 'json' }),
-              data), {
-                url: baseUrl + url,
-                data: data });
-
-              console.log(option, 'option');
-              uni.request(option).then(function (res) {
-                console.log(res, 'res');
-                if (!res[0]) {
-                  if (res[1].data.success) {
-                    resolve(res[1].data);
-                  } else {
-                    reject(res[1].data.message, res[1].data);
-                  }
-                } else {
-                  // uni.hideLoading();
-                  // NOLOGIN && needToast && uni.showToast({
-                  // 	title:res[0].errMsg,
-                  // 	icon:'none'
-                  // })
-                  reject(res[0].errMsg);
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var Queue =
+function Queue() {_classCallCheck(this, Queue);
+  var timer = null;
+  var loading = true;
+  var waitingQueue = [];function
+  execute(_x, _x2, _x3) {return _execute.apply(this, arguments);}function _execute() {_execute = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(task, resolve, reject) {var data, next;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              timer = setTimeout(function () {
+                reject('超时');
+                timer = null;
+                var next = waitingQueue.shift();
+                if (next) {
+                  execute(next.task, next.resolve, next.reject);
                 }
-              });
-            }));case 8:case "end":return _context.stop();}}}, _callee);}));return function fetch(_x, _x2, _x3) {return _ref.apply(this, arguments);};}();var _default =
+              }, 3000);
+              loading = false;_context.prev = 2;_context.next = 5;return (
 
-fetch;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
+                task());case 5:data = _context.sent;
+              console.log(data, 'data');
+              resolve(data);_context.next = 13;break;case 10:_context.prev = 10;_context.t0 = _context["catch"](2);
 
-/***/ }),
-/* 63 */
-/*!**********************************************************************************!*\
-  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesA_index.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+              reject(_context.t0);case 13:
 
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-// import store from '@/store/index.js';
-// import {formatGetUri} from '@/api/util.js';
-// store.commit('EXTCONFIG')
-var ISWX = true;
+              loading = true;
+              clearTimeout(timer);
+              timer = null;
+              next = waitingQueue.shift();
+              if (next) {
+                execute(next.task, next.resolve, next.reject);
+              }case 18:case "end":return _context.stop();}}}, _callee, null, [[2, 10]]);}));return _execute.apply(this, arguments);}
 
-ISWX = false;
+  return function (task, config) {
+    return new Promise(function (resolve, reject) {
+      if (loading || (config === null || config === void 0 ? void 0 : config.leaveQueue)) {
+        execute(task, resolve, reject);
+      } else {
+        waitingQueue.push({
+          task: task,
+          resolve: resolve,
+          reject: reject });
 
-// 'POST GET//必须大写，为了兼容其他应用'
-var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
-var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
+      }
+    });
+  };
+};
 
-
-
-{
-  login: ISWX ? weixin_login : member_login };exports.default = _default;
-
-/***/ }),
-/* 64 */
-/*!**********************************************************************************!*\
-  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesB_index.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-// import store from '@/store/index.js';
-// import {formatGetUri} from '@/api/util.js';
-// store.commit('EXTCONFIG')
-var ISWX = true;
-
-ISWX = false;
-
-// 'POST GET//必须大写，为了兼容其他应用'
-var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
-var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
-
-
-
-{
-  login: ISWX ? weixin_login : member_login };exports.default = _default;
-
-/***/ }),
-/* 65 */
-/*!**********************************************************************************!*\
-  !*** /Users/bangjinyu/Documents/www/uniapp-template/api/modules/pagesC_index.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/api/request.js */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-// import store from '@/store/index.js';
-// import {formatGetUri} from '@/api/util.js';
-// store.commit('EXTCONFIG')
-var ISWX = true;
-
-ISWX = false;
-
-// 'POST GET//必须大写，为了兼容其他应用'
-var weixin_login = function weixin_login(params) {return (0, _request.default)('/api/destination/applet/weixin/member/weixin_login', params);};
-var member_login = function member_login(params) {return (0, _request.default)('/api/destination/applet/member/login', params);};var _default =
-
-
-
-{
-  login: ISWX ? weixin_login : member_login };exports.default = _default;
+var queue = new Queue();var _default =
+queue;exports.default = _default;
 
 /***/ })
 ]]);

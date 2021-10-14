@@ -1,0 +1,33 @@
+{
+    "pages": [
+        "pages/index/index"
+    ],
+    "subPackages": [
+        {
+            "root": "pagesA",
+            "pages": [
+                "index/index"
+            ]
+        },
+        {
+            "root": "pagesB",
+            "pages": [
+                "index/index"
+            ]
+        },
+        {
+            "root": "pagesC",
+            "pages": [
+                "index/index"
+            ]
+        }
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
+}

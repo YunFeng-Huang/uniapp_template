@@ -1,51 +1,67 @@
-
-
 // const baseUrl = 'https://d-applet.iuctrip.com';
 import store from '@/store/index.js';
+import queue from '@/api/queue.js';
 
-const fetch = async (url,data,config) => {
-	let token = uni.getStorageSync('token')
-	const baseUrl = store.state.extConfig.domain;
-	if(!token && (config?.hasToken ?? true )) {
+// type config:{
+// 	hasToken :bool，
+//  leaveQueue :false
+// }
+const fetch = async (url, data, config) => {
+	const {
+		domain,
+		merchantId
+	} = store.state.extConfig;
+	
+	
+	const fn = () => new Promise(async (resolve, reject) => {
+	let token = uni.getStorageSync('token'); 
+	console.log(token,data)
+	if (!token && (config?.hasToken ?? true)) {
 		await store.dispatch('USERLOGIN');
-		token = uni.getStorageSync('token')
 	}
-	console.log(config?.hasToken,token,url);
-	return new Promise(function(resolve, reject) {
-		let header = {
-			'Content-Type': 'application/json;charset=UTF-8',
-			'token': token,
-			'gray-version': 'develop-3.56',
+	let header = {
+		'Content-Type': 'application/json;charset=UTF-8',
+		'token': uni.getStorageSync('token'),
+		'gray-version': 'develop-3.56',
+		'merchant-id': merchantId
+	}
+	
+	data = {
+		...data,
+		...{
+			merchantId
 		}
-		if(data.qs){
-			header['Content-Type'] = 'application/x-www-form-urlencoded'
-		}
-		let option = {...{
+	}
+	
+	if (data.qs) {
+		header['Content-Type'] = 'application/x-www-form-urlencoded'
+	}
+	
+	let option = {
+		...{
 			method: 'POST',
 			header: header,
 			dataType: 'json',
-		},...data,...{
-			url:baseUrl + url,
+		},
+		...data,
+		...{
+			url: domain + url,
 			data,
-		}}
-		console.log(option,'option')
+		}
+	}
+		
 		uni.request(option).then((res) => {
-			console.log(res,'res')
-			if(!res[0]){
-				if(res[1].data.success){
+			if (!res[0]) {
+				if (res[1].data.success) {
 					resolve(res[1].data)
-				}else{
-					reject(res[1].data.message,res[1].data)
+				} else {
+					reject(res[1].data)
 				}
-			}else{
-				// uni.hideLoading();
-				// NOLOGIN && needToast && uni.showToast({
-				// 	title:res[0].errMsg,
-				// 	icon:'none'
-				// })
+			} else {
 				reject(res[0].errMsg)
 			}
 		})
-	})
+	});
+	return queue(fn,config);
 };
-export default fetch
+export default fetch;

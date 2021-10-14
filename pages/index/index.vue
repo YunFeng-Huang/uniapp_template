@@ -19,8 +19,23 @@
 		},
 		created() {
 			 console.log(this.$store);
-			let data = {}
-			this.$api.pages.scenic_spot_list(data)
+			let data = {
+				buyType:2,
+				name: "platform",
+			}
+			this.$api.pages.scenic_spot_list({
+				buyType:2,
+				name: "platform",
+				id:0
+			});
+			this.$api.pages.scenic_spot_list({
+				buyType:2,
+				name: "platform",
+				id:1
+			});
+			// this.$api.pages.scenic_spot_list(data);
+			// this.$api.pages.scenic_spot_list(data);
+			// this.$api.pages.scenic_spot_list(data);
 		}
 	}
 </script>

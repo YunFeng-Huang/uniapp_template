@@ -31,15 +31,15 @@ export default new Vuex.Store({
 			EXTCONFIG(state, value) {
 				try {
 					const res = uni.getSystemInfoSync();
-					console.log(res, 'getSystemInfoSync')
 					state.system = res
+					let extConfig;
 					// #ifdef MP-ALIPAY
-						state.extConfig = my.getExtConfigSync() ? my.getExtConfigSync() : {}
+						extConfig = my.getExtConfigSync() ? my.getExtConfigSync() : {}
 					//#endif
 					//#ifndef MP-ALIPAY
-						state.extConfig = uni.getExtConfigSync ? uni.getExtConfigSync() : {}
+						extConfig = uni.getExtConfigSync ? uni.getExtConfigSync() : {}
 					//#endif
-					console.log(state.extConfig,'state.extConfig')
+					state.extConfig = extConfig;
 					let e = res;
 					let statusBar = 0
 					let customBar = 0
